@@ -50,6 +50,9 @@ function findStrongestTypePerCard(cards) {
   return 0;
 }
 
+// 256955656
+// 256496415
+
 const cardLetterToVal = {
   T: 10,
   J: 11,

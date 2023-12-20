@@ -1,7 +1,7 @@
-const { day3Solver } = require("../Day3");
+const { day3P1Solver } = require("../Day3");
 
 
-describe("day3Solver", () => {
+describe("day3P1Solver", () => {
 
   let ex1 =
     "...."
@@ -120,99 +120,99 @@ describe("day3Solver", () => {
     "......*."
 
   it("should return a total of 0 for ex1", () => {
-    expect(day3Solver(ex1)).toEqual(0);
+    expect(day3P1Solver(ex1).tot).toEqual(0);
   })
 
   it("should return a total of 0 for ex2", () => {
-    expect(day3Solver(ex2)).toEqual(0);
+    expect(day3P1Solver(ex2).tot).toEqual(0);
   })
 
   it("should return a total of 1 for ex3", () => {
-    expect(day3Solver(ex3)).toEqual(1);
+    expect(day3P1Solver(ex3).tot).toEqual(1);
   })
 
   it("should return a total of 1 for ex4", () => {
-    expect(day3Solver(ex4)).toEqual(1);
+    expect(day3P1Solver(ex4).tot).toEqual(1);
   })
 
   it("should return a total of 1 for ex5", () => {
-    expect(day3Solver(ex5)).toEqual(1);
+    expect(day3P1Solver(ex5).tot).toEqual(1);
   })
 
   it("should return a total of 0 for ex6", () => {
-    expect(day3Solver(ex6)).toEqual(0);
+    expect(day3P1Solver(ex6).tot).toEqual(0);
   })
 
   it("should return a total of 0 for ex7", () => {
-    expect(day3Solver(ex7)).toEqual(0);
+    expect(day3P1Solver(ex7).tot).toEqual(0);
   })
 
   it("should return a total of 1 for ex8", () => {
-    expect(day3Solver(ex8)).toEqual(1);
+    expect(day3P1Solver(ex8).tot).toEqual(1);
   })
 
   it("should return a total of 1 for ex9", () => {
-    expect(day3Solver(ex9)).toEqual(1);
+    expect(day3P1Solver(ex9).tot).toEqual(1);
   })
 
   it("should return a total of 1 for ex10", () => {
-    expect(day3Solver(ex10)).toEqual(1);
+    expect(day3P1Solver(ex10).tot).toEqual(1);
   })
 
   it("should return a total of 1 for ex11", () => {
-    expect(day3Solver(ex11)).toEqual(1);
+    expect(day3P1Solver(ex11).tot).toEqual(1);
   })
 
   it("should return a total of 1 for ex12", () => {
-    expect(day3Solver(ex12)).toEqual(1);
+    expect(day3P1Solver(ex12).tot).toEqual(1);
   })
 
   it("should return a total of 1 for ex13", () => {
-    expect(day3Solver(ex13)).toEqual(1);
+    expect(day3P1Solver(ex13).tot).toEqual(1);
   })
 
   it("should return a total of 0 for ex14", () => {
-    expect(day3Solver(ex14)).toEqual(0);
+    expect(day3P1Solver(ex14).tot).toEqual(0);
   })
 
   it("should return a total of 1 for ex15", () => {
-    expect(day3Solver(ex15)).toEqual(1);
+    expect(day3P1Solver(ex15).tot).toEqual(1);
   })
 
   it("should return a total of 0 for ex16", () => {
-    expect(day3Solver(ex16)).toEqual(0);
+    expect(day3P1Solver(ex16).tot).toEqual(0);
   })
 
   it("should return a total of 3356 for ex17", () => {
-    expect(day3Solver(ex17)).toEqual(3356);
+    expect(day3P1Solver(ex17).tot).toEqual(3356);
   })
 
   it("should return a total of 1389 for ex18", () => {
-    expect(day3Solver(ex18)).toEqual(1389);
+    expect(day3P1Solver(ex18).tot).toEqual(1389);
   })
 
   it("should return a total of 925 for ex19", () => {
-    expect(day3Solver(ex19)).toEqual(925);
+    expect(day3P1Solver(ex19).tot).toEqual(925);
   })
 
   it("should return a total of 587 for ex20", () => {
-    expect(day3Solver(ex20)).toEqual(587);
+    expect(day3P1Solver(ex20).tot).toEqual(587);
   })
 
   it("should return a total of 40 for ex21", () => {
-    expect(day3Solver(ex21)).toEqual(40);
+    expect(day3P1Solver(ex21).tot).toEqual(40);
   })
 
   it("should return a total of 49 for ex22", () => {
-    expect(day3Solver(ex22)).toEqual(49);
+    expect(day3P1Solver(ex22).tot).toEqual(49);
   })
 
   it("should return a total of 0 for ex23", () => {
-    expect(day3Solver(ex23)).toEqual(0);
+    expect(day3P1Solver(ex23).tot).toEqual(0);
   })
 
   it("should return a total of 4 for ex24", () => {
-    expect(day3Solver(ex24)).toEqual(4);
+    expect(day3P1Solver(ex24).tot).toEqual(4);
   })
 
 });

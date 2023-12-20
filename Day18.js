@@ -15,10 +15,16 @@ fs.readFile('Day18.txt', 'utf8', function (err, data) {
         yLow: 0
     }
 
+    // TODO: for P2, just track the corners (and maybe the corners before/after?)
+
 	data.split('\n').map(line => {
-        let pattern = /(\w+)\s(\d+)\s\((\#\w+)\)/;
-        let [_, direction, distance, color] = line.match(pattern); // P1
-        distance = Number(distance);
+        let pattern = /(\w+)\s(\d+)\s\(\#(\w+)\)/;
+        // let [_, direction, distance, color] = line.match(pattern); // P1
+        let color = line.match(pattern)[3];
+        let directionToDecode = color.charAt(5);
+        let direction = directionToDecode === "0" ? "R" : directionToDecode === "1" ? "D" : directionToDecode === "2" ? "L" : "U";
+        distance = parseInt(color.substring(0, 5), 16);
+        console.log({ direction, distance })
         const { x, y } = coord;
 
         switch(direction) {
@@ -67,6 +73,8 @@ fs.readFile('Day18.txt', 'utf8', function (err, data) {
         return {direction, distance, color};
     });
 
+    maxVolume = Math.abs(mapCorners.xHigh - mapCorners.xLow) * Math.abs(mapCorners.yHigh - mapCorners.yLow);
+    console.log({ maxVolume })
 
 
     let lavaVolume = 0;

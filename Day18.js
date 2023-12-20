@@ -14,9 +14,10 @@ fs.readFile('Day18.txt', 'utf8', function (err, data) {
         yHigh: 0,
         yLow: 0
     }
-	let mapEdges = data.split('\n').map(line => {
+
+	data.split('\n').map(line => {
         let pattern = /(\w+)\s(\d+)\s\((\#\w+)\)/;
-        let [_, direction, distance, color] = line.match(pattern);
+        let [_, direction, distance, color] = line.match(pattern); // P1
         distance = Number(distance);
         const { x, y } = coord;
 
@@ -67,53 +68,51 @@ fs.readFile('Day18.txt', 'utf8', function (err, data) {
     });
 
 
-    // !!!!!!!!!NOTE!!!!!!!!!!!!! adjusted example input to give space at end of first row
-    // print out the map
+
     let lavaVolume = 0;
-    for(let y = mapCorners.yHigh; y >= mapCorners.yLow; y--) {
-        let row = "";
-        let startingEdge;
-        let dugBetween;
-        for(let x = mapCorners.xLow; x <= mapCorners.xHigh; x++) {
-            // TODO: also check for what's above to see if it should be filled in
-
-            // found an edge
-            if (map[`${x},${y}`]) {
-                if(!startingEdge) {
-                    if (y === 340) {
-                        console.log("starting to dig at:", {x, y})
-                    }
-                    startingEdge = true;
-                    // console.log("start digging")
-                }
-                // this logic is wrong because we need to know both above and below what's going on.
-                // somehow.
-                else if(dugBetween && (!map[`${x+1},${y}`] || !map[`${x},${y+1}`])) {
-                    startingEdge = false;
-                    dugBetween = false
-                }
-
-                // always dig if there's a #
-                row += "#";
-                lavaVolume++;
-
-            }
-            // determine if we are inside or outside the edge
-            else {
-                // we're between edges
-                if(startingEdge && map[`${x},${y+1}`]) {
-                    dugBetween = true;
+    function printMap() {
+        for (let y = mapCorners.yHigh; y >= mapCorners.yLow; y--) {
+            let row = "";
+            for (let x = mapCorners.xLow; x <= mapCorners.xHigh; x++) {
+                if (map[`${x},${y}`]) {
                     row += "#";
                     lavaVolume++;
-                    map[`${x},${y}`] = {}
+
                 }
                 else row += "."
             }
-
+            console.log(row)
         }
-        console.log(row)
     }
 
-    console.log({lavaVolume})
+    let stack = [`1,-1`];
+    while (stack.length) {
+        let next = stack.shift();
+        // add first element to the map, if not already present
+        if (!map[next]) map[next] = {};
+
+        // check to see if up/down/left/right coords exist in map
+        let [x, y] = next.split(",").map(Number);
+        let up = `${x},${y+1}`;
+        let down = `${x},${y-1}`;
+        let left = `${x-1},${y}`;
+        let right = `${x+1},${y}`;
+        if (!map[up] && !stack.includes(up)) {
+            stack.push(up);
+        }
+        if (!map[down] && !stack.includes(down)) {
+            stack.push(down);
+        }
+        if (!map[left] && !stack.includes(left)) {
+            stack.push(left);
+        }
+        if (!map[right] && !stack.includes(right)) {
+            stack.push(right);
+        }
+    }
+
+    printMap();
+
+    console.log("P1:", lavaVolume)
 
 });

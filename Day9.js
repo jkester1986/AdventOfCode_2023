@@ -8,7 +8,6 @@ fs.readFile('Day9.txt', 'utf8', function (err, data) {
     let sum = 0;
     lines.forEach(line => {
         let nums = line.split(/\s+/).map(Number);
-        console.log({nums});
         // find difference until all are 0's
         let rows = [nums];
         let rowInd = 0;
@@ -16,12 +15,7 @@ fs.readFile('Day9.txt', 'utf8', function (err, data) {
         while (!done) {
             let currRow = rows[rowInd];
             sum += currRow[currRow.length-1]
-            // console.log({sum});
-            console.log(currRow.join(", "))
             if(isNaN(sum)) {
-                // rows.forEach(row => {
-                //     console.log(row.join(", "))
-                // })
                 console.log({rowLength: rows.length, rowInd, currRow, prev: rows[rowInd-1]})
                 process.exit();
             }
@@ -31,13 +25,11 @@ fs.readFile('Day9.txt', 'utf8', function (err, data) {
             else {
                 let nextRow = [];
                 currRow.forEach((num, i) => {
-                    // it does say DIFFERENCE
                     if (i !== currRow.length - 1) {
-                        const diff = Math.abs(num - currRow[i+1]);
+                        const diff = currRow[i+1] - num;
                         nextRow.push(diff);
                     }
                 })
-                // console.log({nextRow})
                 rowInd++;
                 rows.push(nextRow);
             }
@@ -45,6 +37,7 @@ fs.readFile('Day9.txt', 'utf8', function (err, data) {
 
     });
 
-    console.log({sum})
+    console.log("P1:", sum)
+
 
 });

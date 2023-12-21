@@ -6,7 +6,10 @@ fs.readFile('Day21.txt', 'utf8', function (err, data) {
   let lines = data.split('\n');
   let lastYInd = lines.length - 1;
   let lastXInd = lines[0].length - 1;
+  console.log({ lastYInd, lastXInd })
   let gardenPlots = {};
+
+  let half = Math.floor(lastYInd / 2);
 
   let currLoc = { x: 0, y: 0 };
   lines.forEach((line, y) => {
@@ -24,10 +27,8 @@ fs.readFile('Day21.txt', 'utf8', function (err, data) {
   let validPlots = ["S", "."];
   while (steps < 5000) {
     steps++; // take a step
-    console.log("step:", steps);
     oldLocations.forEach(location => {
       let [gardenX, gardenY, x, y] = location.split(",").map(Number);
-      // console.log({ gardenX, gardenY, x, y })
       // check up, down, left, right
       if (validPlots.includes(gardenPlots[`${x},${y - 1}`])) {
         newLocations.add(`${gardenX},${gardenY},${x},${y - 1}`);
@@ -76,6 +77,16 @@ fs.readFile('Day21.txt', 'utf8', function (err, data) {
 
     // console.log("\n\n")
   }
+  console.log({steps})
   console.log("reachable:", oldLocations.size)
 
+  // hit edge: steps 65, reachable 3730
+  // full: 14746, steps 130, full square only 7410
+  // -- 1834 per side
+  // full * 2: 58595, steps 260
+  // full * 3: 131575, steps 390
+  // toggle off: 14969, steps 131, full square only 7363
+
+  // 203856 - how many full cycles
+  // 14746 * 203856
 });

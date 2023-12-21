@@ -1,45 +1,48 @@
 fs = require('fs');
-fs.readFile('Day7.txt', 'utf8', function (err, data) {
-  if (err) {
-    return console.log(err);
-  }
-  let lines = data.split('\n');
 
-  
-  let cardInfo = lines.map(hand => {
-    let [cards, bid] = hand.split(" ");
-    const strongestType = findStrongestTypePerCard(cards);
-    // console.log({strongestType})
-    // console.log({ cards, strongestType, bid });
-    return { cards, strongestType, bid };
+function readFileAndSolve() {
+  fs.readFile('Day7.txt', 'utf8', function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+    let lines = data.split('\n');
+
+    
+    let cardInfo = lines.map(hand => {
+      let [cards, bid] = hand.split(" ");
+      const strongestType = findStrongestTypePerCard(cards);
+      return { cards, strongestType, bid: Number(bid) };
+    });
+
+    console.log({cardInfo});
+
+    
+    cardInfo.sort(sortCards);
+    
+    let totalWinnings = 0;
+    // now, we have the rank, along with the bid
+    cardInfo.forEach(({cards, strongestType, bid}, ind) => {
+      totalWinnings += bid * (ind + 1);
+    })
+
+    // console.log({cardInfo})
+    console.log("P1:", totalWinnings);
+
   });
+}
 
-  
-  cardInfo.sort(sortCards);
-  
-  let totalWinnings = 0;
-  // now, we have the rank, along with the bid
-  cardInfo.forEach(({cards, strongestType, bid}, ind) => {
-    console.log({cards, strongestType, bid})
-    totalWinnings += bid * (ind + 1);
-  })
-
-  // console.log({cardInfo})
-  console.log("P1:", totalWinnings);
-
-});
+readFileAndSolve();
 
 // well, someone pointed out a dict would have been great. But this is already here so yeah
 function findStrongestTypePerCard(cards) {
   const sortedCards = cards.split("").sort().join(""); 
-  // console.log({sortedCards})
   // cases, in order of importance
   // 1. Five of a kind
   if (sortedCards.match(/(.)\1{4}/)) return 6;
   // 2. Four of a kind
   if (sortedCards.match(/(.)\1{3}/)) return 5;
   // 3. Full house
-  if (sortedCards.match(/((.)\2{2}(.)\3|(.)\3(.)\5{2})/)) return 4;
+  if (sortedCards.match(/((.)\2{2}(.)\3|(.)\4(.)\5{2})/)) return 4;
   // 4. Three of a kind
   if (sortedCards.match(/(.)\1{2}/)) return 3;
   // 5. Two pairs
@@ -97,3 +100,8 @@ function sortCards(a, b) {
     return 0;
   }
 }
+
+module.exports = {
+  findStrongestTypePerCard,
+  sortCards
+};

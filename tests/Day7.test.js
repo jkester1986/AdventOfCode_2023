@@ -12,27 +12,42 @@ let fullHouse2 = "22211";
 let fullHouse3 = "JKJJK";
 let fullHouse4 = "KJKJJ";
 let fullHouse5 = "Q00Q0";
+let fullHouse6 = "JJQQQ";
 let threeKind1 = "11123";
 let threeKind2 = "22213";
 let threeKind3 = "12333";
+let threeKind4 = "32J33";
 
+// J scenarios
+let allJs = "JJJJJ";
+let noPairs1J = "J2345";
+
+// P1
 describe("findStrongestTypePerCard", () => {
  it("should return 6 for 5 of a kind", () => {
     expect(findStrongestTypePerCard(fiveKind1)).toEqual(6);
     expect(findStrongestTypePerCard(fiveKind2)).toEqual(6);
+    expect(findStrongestTypePerCard(fullHouse6)).toEqual(6);
+
+    // for P2
+   expect(findStrongestTypePerCard(fullHouse3)).toEqual(6);
+   expect(findStrongestTypePerCard(fullHouse4)).toEqual(6);
+   expect(findStrongestTypePerCard(allJs)).toEqual(6);
   });
 
   it("should return 5 for 4 of a kind", () => {
     expect(findStrongestTypePerCard(fourKind1)).toEqual(5);
     expect(findStrongestTypePerCard(fourKind2)).toEqual(5);
     expect(findStrongestTypePerCard(fourKind3)).toEqual(5);
+    expect(findStrongestTypePerCard(threeKind4)).toEqual(5);
   });
 
   it("should return 4 for full house", () => {
     expect(findStrongestTypePerCard(fullHouse1)).toEqual(4);
     expect(findStrongestTypePerCard(fullHouse2)).toEqual(4);
-    expect(findStrongestTypePerCard(fullHouse3)).toEqual(4);
-    expect(findStrongestTypePerCard(fullHouse4)).toEqual(4);
+    // the below were for P1
+    // expect(findStrongestTypePerCard(fullHouse3)).toEqual(4);
+    // expect(findStrongestTypePerCard(fullHouse4)).toEqual(4);
     expect(findStrongestTypePerCard(fullHouse5)).toEqual(4);
   });
 
@@ -40,6 +55,10 @@ describe("findStrongestTypePerCard", () => {
     expect(findStrongestTypePerCard(threeKind1)).toEqual(3);
     expect(findStrongestTypePerCard(threeKind2)).toEqual(3);
     expect(findStrongestTypePerCard(threeKind3)).toEqual(3);
+  });
+
+  it("should return 1 for 1 of a kind", () => {
+    expect(findStrongestTypePerCard(noPairs1J)).toEqual(1);
   });
 });
 

@@ -4,18 +4,23 @@ fs.readFile('Day11.txt', 'utf8', function (err, data) {
 		return console.log(err);
 	}
 	let lines = data.split('\n');
-	let total = 0;
 	let expanded = [];
 
+	const expansionAmount = 1_000_000 - 1;
+
+	let expandYAt = [];
 	// expand vertically
-	lines.forEach(line => {
+	lines.forEach((line, i) => {
 		if(!line.includes("#")) {
 			// expand universe
-			expanded.push(line);
+			// expanded.push(line);
+			expandYAt.push(i);
 		}
 		expanded.push(line);
 	});
 
+
+	let expandXAt = [];
 
 	// expand horizontally
 	let xPos = 0;
@@ -30,12 +35,7 @@ fs.readFile('Day11.txt', 'utf8', function (err, data) {
 			}
 			// if we reach the end and there's no #, we need to expand
 			if (i === expanded.length - 1) {
-				// expand universe
-				expanded.forEach((line, i) => {
-					expanded[i] = line.slice(0, xPos) + "." + line.slice(xPos);
-				});
-				// move the xPos an extra space to the right since we've created an extra column
-				xPos++;
+				expandXAt.push(xPos);
 			}
 		}
 
@@ -43,10 +43,12 @@ fs.readFile('Day11.txt', 'utf8', function (err, data) {
 	}
 
 	let galaxies = [];
+	let galaxyNumber = 0;
 	expanded.forEach((line, y) => {
 		line.split("").forEach((char, x) => {
 			if (char === "#") {
-				galaxies.push({ x, y });
+				galaxyNumber++;
+				galaxies.push({ x, y, galaxyNumber });
 			}
 		});
 	});
@@ -57,7 +59,29 @@ fs.readFile('Day11.txt', 'utf8', function (err, data) {
 		let galaxy = galaxies.shift();
 		galaxies.forEach(galaxy2 => {
 			// x distance + y distance
-			distance += Math.abs(galaxy.x - galaxy2.x) + Math.abs(galaxy.y - galaxy2.y);
+			let localDistance = 0;
+			localDistance += Math.abs(galaxy.x - galaxy2.x) + Math.abs(galaxy.y - galaxy2.y);
+
+			// now do the expanded bits:
+			// 1. find how many expanded rows are between the two galaxies
+			expandYAt.forEach(y => {
+				let higherY = galaxy.y > galaxy2.y ? galaxy.y : galaxy2.y;
+				let lowerY = galaxy.y > galaxy2.y ? galaxy2.y : galaxy.y;
+				if (y > lowerY && y < higherY) {
+					localDistance += expansionAmount;
+				}
+			});
+
+			// 2. find out how many expanded columns
+			expandXAt.forEach(x => {
+				let higherX = galaxy.x > galaxy2.x ? galaxy.x : galaxy2.x;
+				let lowerX = galaxy.x > galaxy2.x ? galaxy2.x : galaxy.x;
+				if (x > lowerX && x < higherX) {
+					localDistance += expansionAmount;
+				}
+			});
+
+			distance += localDistance;
 		});
 	}
 
@@ -65,3 +89,19 @@ fs.readFile('Day11.txt', 'utf8', function (err, data) {
 	console.log("total distance:", distance)
 	
 });
+
+
+/*
+....1........
+.........2...
+3............
+.............
+.............
+........4....
+.5...........
+.##.........6
+..##.........
+...##........
+....##...7...
+8....9.......
+*/

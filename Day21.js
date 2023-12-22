@@ -10,6 +10,7 @@ fs.readFile('Day21.txt', 'utf8', function (err, data) {
   let gardenPlots = {};
 
   let half = Math.floor(lastYInd / 2);
+  let cycle = lastYInd + 1;
 
   let currLoc = { x: 0, y: 0 };
   lines.forEach((line, y) => {
@@ -25,7 +26,8 @@ fs.readFile('Day21.txt', 'utf8', function (err, data) {
   oldLocations.add(`0,0,${currLoc.x},${currLoc.y}`);
   let newLocations = new Set();
   let validPlots = ["S", "."];
-  while (steps < 5000) {
+  let total = 0;
+  while (steps < cycle*3) {
     steps++; // take a step
     oldLocations.forEach(location => {
       let [gardenX, gardenY, x, y] = location.split(",").map(Number);
@@ -61,30 +63,58 @@ fs.readFile('Day21.txt', 'utf8', function (err, data) {
 
 
 
-    // lines.forEach((line, y) => {
-    //   let plots = line.split("");
-    //   let lineText = "";
-    //   plots.forEach((plot, x) => {
-    //     if (oldLocations.has(`0,0,${x},${y}`)) {
-    //       lineText += "O";
-    //     }
-    //     else {
-    //       lineText += plot;
-    //     }
-    //   });
-    //   console.log(lineText);
-    // })
+    // print, targeting a specific garden
+    // also set total for that specific garden
+    // reset total each time
+    total = 0;
+    lines.forEach((line, y) => {
+      let plots = line.split("");
+      let lineText = "";
+      plots.forEach((plot, x) => {
+        if (oldLocations.has(`-1,2,${x},${y}`)) {
+          lineText += "O";
+          total++;
+        }
+        else {
+          lineText += plot;
+        }
+      });
+      // console.log(lineText);
+    })
 
     // console.log("\n\n")
   }
-  console.log({steps})
+  console.log({total, steps})
   console.log("reachable:", oldLocations.size)
 
+  // step 131 crosses over to other garden sections
+
   // hit edge: steps 65, reachable 3730
-  // full: 14746, steps 130, full square only 7410
-  // -- 1834 per side
-  // full * 2: 58595, steps 260
-  // full * 3: 131575, steps 390
+
+  // full: 14969, steps 131
+  // -- center: 7363
+  // -- top: 1881
+  // -- bottom: 1915
+  // -- left: 1929
+  // -- right: 1881
+  // -- TL/TR/BL/BR: 0
+
+  /* edge gardens are x less steps to ^^, where x is the number of complete cycles (mod cycle?)*/
+
+  // full * 2: 59483, steps 262 - flipped for +1
+  /** -- right: 7363
+   * -- left: 7363
+   * -- bottom: 7363
+   * -- top: 7363
+   * -- center: 7410 / 7363 (+ 1)
+   * -- TL: 3756
+   * -- TR: 3718
+   * -- BR: 3750
+   * -- BL: 3791
+   * 
+   * left/right/top/bottom is 1 before full
+   */
+  // full * 3: 133543, steps 393
   // toggle off: 14969, steps 131, full square only 7363
 
   // 203856 - how many full cycles

@@ -29,8 +29,10 @@ fs.readFile('Day23.txt', 'utf8', function (err, data) {
         }
     // get the first option from the current step, then remove it
     let currOption = {...steps.get(step)?.shift()};
+
+    if()
     // TODO: check to see if we reached the end
-    visited.add(String(currOption));
+    visited.add(String(currOption)); // TODO: think about how we handle this when the end has a short path that doesn't vary (think need to do with recursion...)
     // if there's nothing left, remove it
     if (!steps.get(step)?.length)
         steps.delete(step)

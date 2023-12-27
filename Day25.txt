@@ -4,7 +4,7 @@ rgl: hfg
 rpt: zhq
 fnx: nrs xnq nhc czd
 dqb: hhg dkk
-mfg: szc
+mfg: szc xqh
 kvr: pnh
 xfj: mtz
 szp: hlv fqg knb tsg
@@ -155,6 +155,7 @@ ngd: cdt xst tkt
 nkv: nbs
 fvz: hmq tts
 jkx: hpm chx ftn
+xqh: qhr klf
 dhd: pmj tth
 sqf: zzr bnr mrb bfv
 mhc: hnf qph tlk htm glc
@@ -418,7 +419,7 @@ qmc: zkj tbh
 qbb: nhh lsg
 mjp: cbv dch
 dsl: kzj dbg
-hgv: ggg
+hgv: ggg khn
 qgz: zzx gns phv
 xgp: cpj tcp sxk jsx cpd
 bbl: jpj kbt mct
@@ -634,7 +635,7 @@ bgx: cxf xdv fhj dtn
 djq: bmt fbg
 zxn: mjl
 rbp: rcs tqj
-psf: mqb qcc xgx
+psf: khn mqb qcc xgx
 lpg: hpb hgc fqg tgz
 slv: rdh dtg vcb
 dnf: tks vtz
@@ -908,6 +909,7 @@ rfs: szk bnl
 gmq: vgz nxg htr jfc jpj
 mcx: rcs pjs hzs hqs
 klr: gmb ftp clv rkl
+qlc: tjl ncv rbp
 qlp: qcm hbp
 tkf: mvs snk jxc
 mtn: jvd
@@ -1143,6 +1145,7 @@ mdv: mtt
 mql: jvr djv
 rvz: djb txd sqm dmf rsn szs vlm
 jts: dpx fbg
+khn: pxc cdz hpg
 htr: mvm
 vqn: qjq gmv
 hlg: ssx dbq cxb
